@@ -1,0 +1,91 @@
+<div class="page-header">
+  <h1>
+    Zutatenliste
+    <button class="btn btn-primary pull-right" ng-click="newZutat()">
+      Neue Zutat
+    </button>
+  </h1>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <div data-spy="affix" data-offset-top="100" data-offset-bottom="300">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input class="form-control" type="text" ng-model="searchZutat">
+          </div>
+          <button class="close" ng-click="clearSearchZutat()"
+              style="position: relative; top: -28px; right: 8px; z-index: 2">
+            &times;
+          </button>
+        </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <ul class="list-group">
+      <a ng-repeat="zutat in zutaten | filter:searchZutat"
+          class="list-group-item" href="#/zutat/{{zutat.id}}">
+        {{zutat.id}}
+      </a>
+    </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="addZutatModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Neue Zutat</h4>
+      </div>
+      <form class="form-horizontal" ng-submit="saveZutat()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" for="newZutatName">
+            Name
+            </label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" id="newZutatName"
+                ng-model="zutat._id" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-2 control-label">
+              <label for="newZutatWirk">
+                Wirkungen
+              </label>
+              <p class="small">
+                Hier kannst du einfach die Antwort eines Druiden reinkopieren.
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <textarea class="form-control small" id="newZutatWirk"
+                rows="10" ng-model="wirkungenText"></textarea>
+            </div>
+            <div class="col-lg-3">
+              <h5>Wirkungen</h5>
+              <ul class="list-group small">
+                <li class="list-group-item"
+                    ng-repeat="wirk in wirkungenText| filterBulkWirk">
+                  {{wirk}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button"
+              data-dismiss="modal">
+            Abbrechen
+          </button>
+          <button class="btn btn-primary" type="submit">
+            Speichern
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

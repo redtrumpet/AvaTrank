@@ -1,0 +1,62 @@
+main {
+    margin-top: 70px;
+
+}
+footer {
+    position: relative;
+    bottom: 0;
+    background-color: #f0f0f0;
+    padding-top: 15px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: solid 1px #ccc;
+}
+
+#vorteile {
+    text-align: justify;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+textarea.small {
+    font-size: 85%;
+}
+.panel-body>*:last-child {
+    margin-bottom: 0;
+}
+.pointer {
+    cursor: pointer;
+}
+.affix {
+    position: fixed;
+    top: 70px;
+    width: 208px;
+}
+.affix-top {
+    position: inherit;
+}
+textarea.form-control {
+    resize: vertical;
+}
+.checkbox:first-child {
+    margin-top: 0;
+}
+h3.panel-title {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.panel-group .panel .list-group {
+    border-top: 1px solid #ddd;
+}
+.list-group.small .list-group-item {
+    padding: 5px 10px;
+}
+.page-header:first-child {
+    margin-top: 0;
+}
+

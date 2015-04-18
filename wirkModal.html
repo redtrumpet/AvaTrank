@@ -1,0 +1,41 @@
+<div class="modal fade" id="addWirkungenModal" ng-controller="ChangeWirkCtrl">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Wirkungen hinzuf&uuml;gen</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel-group" id="panelParent">
+          <div class="panel panel-default" ng-repeat="sec in wirkSections"
+            ng-show="(wirkungen | filterWirkungen:sec.key:zutat.name).length > 0">
+            <div class="panel-heading" data-toggle="collapse"
+                data-parent="#panelParent" data-target="#{{sec.key}}Collapse">
+              <h4 class="panel-title">{{sec.key}}</h4>
+            </div>
+            <div class="panel-collapse collapse" id="{{sec.key}}Collapse">
+              <div class="panel-body">
+                <div class="checkbox"
+                    ng-repeat="wirk in wirkungen |
+                      filterWirkungen:sec.key:zutat.name |
+                      orderBy:'value.order'">
+                  <label>
+                    <input type="checkbox" value="{{wirk.id}}"
+                      ng-model="wirk.selected">
+                    {{wirk.value.text}} {{wirk.value.order}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+        <button class="btn btn-primary" ng-click="saveChangedWirkungen()">
+          Speichern
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

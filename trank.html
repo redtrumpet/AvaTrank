@@ -1,0 +1,185 @@
+<div class="page-header">
+  <h1>
+    {{trank._id}}
+    <button class="btn btn-danger pull-right" data-toggle="modal"
+        href="#deleteTrankModal">
+      Trank löschen
+    </button>
+  </h1>
+</div>
+<div class="row">
+  <div class="col-md-5 col-md-offset-1 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Zutaten</h3>
+      </div>
+      <ul class="list-group">
+        <li ng-repeat="zutat in trank.zutaten"
+            class="list-group-item">
+          <a href="#/zutat/{{zutat}}">{{zutat}}</a>
+          <button type="button" class="close"
+              aria-hidden="true"
+              ng-click="deleteZutat($index)">
+            &times;
+          </button>
+        </li>
+      </ul>
+      <div class="panel-footer">
+        <div class="row">
+          <form ng-submit="addZutat()">
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-sm"
+                id="inputNewZutat" placeholder="Neue Zutat"
+                ng-model="newZutat">
+            </div>
+            <button type="submit"
+                class="btn btn-default btn-sm"
+                ng-click="addZutat()">
+              <span class="glyphicon glyphicon-plus"></span>
+              Hinzufügen
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Notizen</h3>
+        </div>
+        <div class="panel-body"
+          ng-show="trank.notizen.length > 0"
+          ng-bind-html="getNotizenHTML()">
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-default btn-sm"
+                ng-click="changeNotizen()">
+              Notizen &auml;ndern
+            </button>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-5 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Effekte</h3>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Bereich</th>
+            <th>Effekt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="pointer"
+              ng-repeat="(bereich, effekt) in trank.effekte |
+                orderBy:'$index'"
+              ng-click="changeEffekt(bereich)">
+            <td>{{effNames[bereich]}}</td>
+            <td>{{effekt}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Rituale</h3>
+      </div>
+      <div class="list-group">
+        <li class="list-group-item" ng-repeat="rit in trank.rituale">
+          <a href="#/rit/{{rit}}">{{rit}}</a>
+          <button class="close" aria-hidden="true"
+              ng-click="deleteRit($index)">
+            &times;
+          </button>
+        </li>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <form ng-submit="addRit()">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+              <input type="text" class="form-control input-sm"
+                placeholder="Neues Ritual" ng-model="newRit">
+            </div>
+            <button type="submit" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-plus"></span>
+              Hinzufügen
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modals-->
+<div class="modal fade" id="changeEffektModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form ng-submit="saveEffekt()">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">{{effNames[effektToChange]}} &auml;ndern</h4>
+        </div>
+        <div class="modal-body">
+          <input type="number" class="form-control" ng-model="change">
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">
+            Abbrechen
+          </button>
+          <button class="btn btn-primary" type="submit">
+            Speichern
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="changeNotizenModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form ng-submit="saveNotizen()">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">Notizen &auml;ndern</h4>
+        </div>
+        <div class="modal-body">
+          <textarea class="form-control" rows="10" ng-model="change"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">
+            Abbrechen
+          </button>
+          <button class="btn btn-primary" type="submit">Speichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="deleteTrankModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Löschen</h4>
+      </div>
+      <div class="modal-body">
+        <strong>
+          Achtung! Möchtest du diesen Trank wirklich unwiderruflich
+          l&ouml;schen?
+        </strong>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+        <button class="btn btn-danger" ng-click="deleteTrank()">
+          L&ouml;schen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

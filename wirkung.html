@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1>Wirkung</h1>
+</div>
+<div class="row">
+  <div class="col-lg-offset-2 col-md-offset-1 col-lg-4 col-md-5 col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Text</h4>
+        </div>
+        <div class="panel-body">{{wirkText}}</div>
+    </div>
+    <div class="panel panel-default" ng-show="traenke.length > 0">
+      <div class="panel-heading">
+        <h3 class="panel-title">Tr&auml;nke mit dieser Wirkung</h3>
+      </div>
+      <div class="list-group">
+        <a href="#/trank/{{trank}}" class="list-group-item"
+            ng-repeat="trank in traenke">
+            {{trank}}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-5 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Zutaten mit dieser Wirkung</h4>
+      </div>
+      <div class="list-group">
+        <a href="#/zutat/{{zutat}}" class="list-group-item"
+            ng-repeat="zutat in zutaten">
+          {{zutat}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+

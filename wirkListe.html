@@ -1,0 +1,48 @@
+<div class="page-header">
+    <h1>Liste von Wirkungen</h1>
+</div>
+<div class="col-lg-3">
+  <div class="panel panel-primary" data-spy="affix" data-offset-top="100" data-offset-bottom="300">
+    <ul class="list-group">
+      <a class="list-group-item" ng-class="{active: !selectedSection}"
+          href="#/wirkListe/"
+          ng-click="selectSection()">
+        Alle
+      </a>
+      <a class="list-group-item"
+          ng-class="{active: selectedSection === keywords}"
+          href="#/wirkListe/?sec={{section}}"
+          ng-repeat="(section, keywords) in sections"
+          ng-click="selectSection(section)">
+        {{section}}
+      </a>
+    </ul>
+  </div>
+</div>
+<div class="col-lg-6">
+  <form class="form">
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="Durchsuchen"
+          ng-model="searchWirk">
+      </div>
+      <button class="close" ng-click="clearSearchWirk()"
+          style="position: relative; top: -28px; right: 8px; z-index: 2">
+        &times;
+      </button>
+    </div>
+  </form>
+  <ul class="list-group">
+    <a class="list-group-item"
+        ng-repeat="wirkung in wirkungen | sectionFilter:selectedSection
+                   | filter:searchWirk"
+        href="#/wirkung/{{wirkung.key}}">
+      {{wirkung.key}}
+      <span class="badge">{{wirkung.value}}</span>
+    </a>
+  </ul>
+</div>
+
